@@ -1,14 +1,12 @@
-<script setup>
+<script setup lang="ts">
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import CompanyDetailPage from '@/Components/CompanyDetailPage.vue';
 import { Head, Link } from '@inertiajs/vue3';
+import type { Company } from '@/types';
 
-defineProps({
-    company: {
-        type: Object,
-        required: true,
-    },
-});
+defineProps<{
+    company: Company;
+}>();
 </script>
 
 <template>

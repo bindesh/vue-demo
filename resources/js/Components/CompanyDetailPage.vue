@@ -1,18 +1,16 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue';
 import CompanyDetailHero from '@/Components/CompanyDetailHero.vue';
 import CompanyPitch from '@/Components/CompanyPitch.vue';
 import CompanyTabs from '@/Components/CompanyTabs.vue';
 import CompanySocials from '@/Components/CompanySocials.vue';
+import type { Company, TabType } from '@/types';
 
-const props = defineProps({
-    company: {
-        type: Object,
-        required: true,
-    },
-});
+defineProps<{
+    company: Company;
+}>();
 
-const activeTab = ref('about');
+const activeTab = ref<TabType>('about');
 </script>
 
 <template>

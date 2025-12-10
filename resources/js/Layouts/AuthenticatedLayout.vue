@@ -1,16 +1,16 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import NavLink from '@/Components/NavLink.vue';
 import { Link } from '@inertiajs/vue3';
 
-const sidebarOpen = ref(false);
+const sidebarOpen = ref<boolean>(false);
 
-const toggleSidebar = () => {
+const toggleSidebar = (): void => {
     sidebarOpen.value = !sidebarOpen.value;
 };
 
-const closeSidebar = () => {
+const closeSidebar = (): void => {
     sidebarOpen.value = false;
 };
 </script>

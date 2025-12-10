@@ -1,20 +1,20 @@
-<script setup>
+<script setup lang="ts">
 import CompanyDetailSlider from '@/Components/CompanyDetailSlider.vue';
+import type { Company } from '@/types';
 
-const props = defineProps({
-    company: {
-        type: Object,
-        default: null,
-    },
-    isOpen: {
-        type: Boolean,
-        default: false,
-    },
+const props = withDefaults(defineProps<{
+    company?: Company | null;
+    isOpen?: boolean;
+}>(), {
+    company: null,
+    isOpen: false,
 });
 
-const emit = defineEmits(['close']);
+const emit = defineEmits<{
+    close: [];
+}>();
 
-const closeSidebar = () => {
+const closeSidebar = (): void => {
     emit('close');
 };
 </script>

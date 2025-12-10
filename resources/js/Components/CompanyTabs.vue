@@ -1,14 +1,17 @@
-<script setup>
-const props = defineProps({
-    activeTab: {
-        type: String,
-        default: 'about',
-    },
+<script setup lang="ts">
+import type { TabType } from '@/types';
+
+const props = withDefaults(defineProps<{
+    activeTab?: TabType;
+}>(), {
+    activeTab: 'about',
 });
 
-const emit = defineEmits(['update:activeTab']);
+const emit = defineEmits<{
+    'update:activeTab': [value: TabType];
+}>();
 
-const setActiveTab = (tab) => {
+const setActiveTab = (tab: TabType): void => {
     emit('update:activeTab', tab);
 };
 </script>

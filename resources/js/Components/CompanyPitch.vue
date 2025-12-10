@@ -1,14 +1,12 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue';
+import type { Company } from '@/types';
 
-defineProps({
-    company: {
-        type: Object,
-        required: true,
-    },
-});
+defineProps<{
+    company: Company;
+}>();
 
-const showExtendedPitch = ref(false);
+const showExtendedPitch = ref<boolean>(false);
 </script>
 
 <template>

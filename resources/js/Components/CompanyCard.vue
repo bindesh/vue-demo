@@ -1,17 +1,15 @@
-<script setup>
+<script setup lang="ts">
 import { Link } from '@inertiajs/vue3';
+import type { Company } from '@/types';
 
-defineProps({
-    company: {
-        type: Object,
-        required: true,
-    },
-});
+defineProps<{
+    company: Company;
+}>();
 </script>
 
 <template>
     <Link
-        :href="route('company.show', company.id)"
+        :href="route('admin.companies.show', { company: company.id })"
         class="bg-white border border-gray-200 rounded-lg shadow hover:shadow-lg transition duration-200 overflow-hidden"
     >
         <div class="p-6">

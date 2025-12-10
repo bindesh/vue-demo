@@ -1,37 +1,35 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import CompanySidebar from '@/Components/CompanySidebar.vue';
 import { Head, Link } from '@inertiajs/vue3';
+import type { Company, Pagination } from '@/types';
 
-const props = defineProps({
-    companies: {
-        type: Array,
-        default: () => [],
-    },
-    pagination: {
-        type: Object,
-        default: () => ({
-            current_page: 1,
-            last_page: 1,
-            per_page: 10,
-            total: 0,
-            from: null,
-            to: null,
-            links: [],
-        }),
-    },
+const props = withDefaults(defineProps<{
+    companies?: Company[];
+    pagination?: Pagination;
+}>(), {
+    companies: () => [],
+    pagination: () => ({
+        current_page: 1,
+        last_page: 1,
+        per_page: 10,
+        total: 0,
+        from: null,
+        to: null,
+        links: [],
+    }),
 });
 
-const isSidebarOpen = ref(false);
-const selectedCompany = ref(null);
+const isSidebarOpen = ref<boolean>(false);
+const selectedCompany = ref<Company | null>(null);
 
-const openSidebar = (company) => {
+const openSidebar = (company: Company): void => {
     selectedCompany.value = company;
     isSidebarOpen.value = true;
 };
 
-const closeSidebar = () => {
+const closeSidebar = (): void => {
     isSidebarOpen.value = false;
     setTimeout(() => {
         selectedCompany.value = null;

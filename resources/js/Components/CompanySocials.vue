@@ -1,10 +1,9 @@
-<script setup>
-defineProps({
-    company: {
-        type: Object,
-        required: true,
-    },
-});
+<script setup lang="ts">
+import type { Company } from '@/types';
+
+defineProps<{
+    company: Company;
+}>();
 </script>
 
 <template>

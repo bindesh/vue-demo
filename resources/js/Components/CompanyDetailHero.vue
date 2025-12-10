@@ -1,48 +1,23 @@
-<script setup>
-import { ref, computed } from 'vue';
+<script setup lang="ts">
+import { computed } from 'vue';
+import type { Company } from '@/types';
 
-const props = defineProps({
-    company: {
-        type: Object,
-        required: true,
-    },
-    responsive: {
-        type: Boolean,
-        default: false,
-    },
+const props = defineProps<{
+    company: Company;
+    responsive?: boolean;
+}>();
+
+const companyImage = computed<string | null>(() => {
+    if (props.company.images && Array.isArray(props.company.images) && props.company.images.length > 0) {
+        return props.company.images[0];
+    }
+    return null;
 });
-
-const currentImageIndex = ref(0);
-
-const companyImages = computed(() => {
-    if (props.company.images && Array.isArray(props.company.images)) {
-        return props.company.images;
-    }
-    return [];
-});
-
-const nextImage = () => {
-    if (companyImages.value.length > 0) {
-        currentImageIndex.value = (currentImageIndex.value + 1) % companyImages.value.length;
-    }
-};
-
-const prevImage = () => {
-    if (companyImages.value.length > 0) {
-        currentImageIndex.value = currentImageIndex.value === 0 
-            ? companyImages.value.length - 1 
-            : currentImageIndex.value - 1;
-    }
-};
-
-const goToImage = (index) => {
-    currentImageIndex.value = index;
-};
 </script>
 
 <template>
     <div class="space-y-6">
-        <!-- Hero Section with Image Slider -->
+        <!-- Hero Section with Single Image -->
         <div 
             :class="[
                 'relative bg-red-200 rounded-3xl overflow-visible',
@@ -50,10 +25,10 @@ const goToImage = (index) => {
             ]"
         >
             <!-- Background Image -->
-            <div v-if="companyImages.length > 0" class="absolute inset-0 rounded-3xl overflow-hidden">
+            <div v-if="companyImage" class="absolute inset-0 rounded-3xl overflow-hidden">
                 <img
-                    :src="companyImages[currentImageIndex]"
-                    :alt="`${company.name} image ${currentImageIndex + 1}`"
+                    :src="companyImage"
+                    :alt="`${company.name} image`"
                     class="w-full h-full object-cover"
                 />
             </div>
@@ -88,41 +63,6 @@ const goToImage = (index) => {
                         <span class="text-gray-400 text-xs text-center">Logo</span>
                     </div>
                 </div>
-            </div>
-
-            <!-- Navigation Arrows -->
-            <button 
-                v-if="companyImages.length > 1"
-                @click="prevImage"
-                class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white hover:bg-gray-100 text-gray-800 rounded-full p-2 shadow-lg transition-all z-20"
-                :class="responsive ? 'p-2' : 'sm:left-8 p-3'"
-            >
-                <svg class="w-4 h-4 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                </svg>
-            </button>
-            <button 
-                v-if="companyImages.length > 1"
-                @click="nextImage"
-                class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white hover:bg-gray-100 text-gray-800 rounded-full p-2 shadow-lg transition-all z-20"
-                :class="responsive ? 'p-2' : 'sm:right-8 p-3'"
-            >
-                <svg class="w-4 h-4 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                </svg>
-            </button>
-
-            <!-- Image Indicators -->
-            <div v-if="companyImages.length > 1" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 z-10">
-                <button 
-                    v-for="(image, index) in companyImages" 
-                    :key="index"
-                    @click="goToImage(index)"
-                    :class="[
-                        'h-1 sm:h-2 rounded-full transition-all',
-                        currentImageIndex === index ? 'bg-gray-800 w-6 sm:w-8' : 'bg-gray-400 hover:bg-gray-600 w-1 sm:w-2'
-                    ]"
-                ></button>
             </div>
         </div>
 
