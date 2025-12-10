@@ -1,0 +1,66 @@
+/node_modules
+/vendor
+/.vscode
+/.idea
+/.vs
+
+# Laravel
+/public/hot
+/public/storage
+/storage/*.key
+/vendor
+.env
+.env.backup
+.env.production
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+auth.json
+npm-debug.log
+yarn-error.log
+/.fleet
+/.idea
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# Logs
+*.log
+storage/logs/*
+!storage/logs/.gitignore
+
+# Cache
+bootstrap/cache/*
+!bootstrap/cache/.gitignore
+
+# Testing
+/coverage
+.phpunit.result.cache
+
+# Build
+/public/build
+/public/hot
+/public/storage
+/storage/*.key
+
+# Misc
+*.cache
+*.tmp
+*.temp
+
